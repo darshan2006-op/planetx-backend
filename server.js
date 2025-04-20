@@ -15,23 +15,8 @@ dotenv.config();
 console.log("ENV FILE LOADED:", process.env.AWS_ACCESS_KEY_ID? "Loaded" : "Not Loaded");
 const app = express();
 
-const allowedOrigins = [
-  "https://www.planetx-live.com", // your frontend
-  "http://localhost:3000",        // local dev
-];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-      console.log("origin ",origin)
-    } else {
-      callback(new Error("Not allowed by CORS"));
-      console.log("origin not allowed ",origin)
-    }
-  },
-  credentials: true,
-}));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
