@@ -14,16 +14,10 @@ const { pushTestData } = require("./scripts/add_test");
 dotenv.config();
 console.log("ENV FILE LOADED:", process.env.AWS_ACCESS_KEY_ID? "Loaded" : "Not Loaded");
 const app = express();
-const corsOptions = {
-  // Replace with your domain
-  origin: 'https://planetx-live.com',
-  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204
-};
+
 
 // Middleware
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
