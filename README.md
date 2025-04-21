@@ -10,9 +10,9 @@ This API provides endpoints for OTP-based user authentication.
 
 ### **Base URL**
 
-`http://localhost:5000` for running locally
+`http://localhost:4000` for running locally
 
-`http://3.109.121.71:5000` for aws url
+`http://api.planetx-live.com` for aws url
 
 ---
 
