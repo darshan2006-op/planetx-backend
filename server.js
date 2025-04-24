@@ -16,26 +16,25 @@ console.log("ENV FILE LOADED:", process.env.AWS_ACCESS_KEY_ID? "Loaded" : "Not L
 const app = express();
 
 // Middleware
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  next();
-});
+// Configure CORS with specific options
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://www.planetx-live.com', 'https://planetx-live.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
-app.use(cors());
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-
+// Increase JSON payload size limit
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 const startServer = async () => {
   try {
     await connectDB();
 
-    
+
     // if (process.env.NODE_ENV !== "production") {
     //   await pushTestData();
     // }
@@ -44,7 +43,7 @@ const startServer = async () => {
       res.send("Server is Ready");
     });
 
-    
+
     app.use("/api/auth", authRoutes);
 
     // Protected Routes (Require authentication)
