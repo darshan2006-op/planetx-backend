@@ -51,7 +51,7 @@ async function createBucketIfNotExists(bucketName) {
   }
 }
 
-createBucketIfNotExists("myawsbucket-planetx");
+createBucketIfNotExists(process.env.AWS_BUCKET_NAME);
 
 
 const bucketName = process.env.AWS_BUCKET_NAME;
