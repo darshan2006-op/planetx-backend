@@ -7,7 +7,7 @@ exports.loginAdmin = async (req, res) => {
     return res.status(400).json({ message: "Email and password are required" });
   }
 
-  if (email === "admin@gmail.com" && password === "@dminP@ss") {
+  if (email === "admin@gmail.com"  && password === "@dminP@ss") {
     try {
       const accessToken = jwt.sign(
         { name: "admin", role: "admin" },
